@@ -39,4 +39,8 @@ public class Predict {
 		return results;
 	}
 
+	private static int[] getEcsAmount(String dateStart,String dateEnd){
+
+	}
+
 }
