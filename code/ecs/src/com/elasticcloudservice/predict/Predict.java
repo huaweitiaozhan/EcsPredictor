@@ -66,6 +66,7 @@ public class Predict {
             h0 = h0.add(h.get(0).numberMultiply(learingRate));
             bout = bout.add(db0.numberMultiply(learingRate));
         }
+
     }
 
     private static Matrix genetateDefaultMatrix(int row, int column, float defaultValue) {
@@ -88,8 +89,37 @@ public class Predict {
         return new Matrix(matrixs);
     }
 
-    private static int getDate(String input) {
+    static int[] monthList1={0,31,59,90,120,151,181,212,243,273,304,334};
+    static int[] monthList2={0,31,60,91,121,152,182,213,244,274,305,335};
 
+    private static int getDate(String input){
+        int result=0;
+        String[] temp=input.split("-");
+        int year=Integer.parseInt(temp[0]);
+        int month=Integer.parseInt(temp[1]);
+        int day=Integer.parseInt(temp[2]);
+        if(judge(year)){
+            result=result+monthList2[month-1]+day;
+        }
+        else{
+            result=result+monthList1[month-1]+day;
+        }
+        return result;
+    }
+
+    private static boolean judge(int y){
+        boolean is=false;
+        if(y%400==0){
+            is=true;
+        }
+        else{
+            if(y%100!=0){
+                if(y%4==0){
+                    is=true;
+                }
+            }
+        }
+        return is;
     }
 
     private static float[][] getEcsAmount(String[] inputContent, int date) {
