@@ -16,6 +16,15 @@ public class Matrix {
         return this;
     }
 
+    public Matrix numberMultiply(double number) {
+        for (int i = 0; i < value.length; i++) {
+            for (int j = 0; j < value[0].length; j++) {
+                value[i][j] *= number;
+            }
+        }
+        return this;
+    }
+
     public Matrix multiply(Matrix matrix) {
         float[][] c = strassenMatrixMultiplyRecursive(value, matrix.value);
         Matrix m = new Matrix(c);
@@ -66,6 +75,16 @@ public class Matrix {
             }
         }
         return this;
+    }
+
+    public Matrix transform() {
+        Matrix matrix = new Matrix(new float[this.value[0].length][this.value.length]);
+        for (int i = 0; i < matrix.value.length; i++) {
+            for (int j = 0; i < matrix.value[0].length; j++) {
+                matrix.value[i][j] = this.value[j][i];
+            }
+        }
+        return matrix;
     }
 
     private static float sigmod(double value) {
