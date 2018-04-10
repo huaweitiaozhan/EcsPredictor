@@ -32,6 +32,16 @@ public class Matrix {
 
     }
 
+    public float calulateLoss(Matrix matrix) {
+        float loss = 0.0f;
+        for (int i = 0; i < value.length; i++) {
+            for (int j = 0; j < value[0].length; j++) {
+                loss = (value[i][j] - matrix.value[i][j]) * (value[i][j] - matrix.value[i][j]);
+            }
+        }
+        return loss / value.length / value[0].length;
+    }
+
     public Matrix sigmod() {
         for (int i = 0; i < value.length; i++) {
             for (int j = 0; j < value[0].length; j++) {
