@@ -2,3 +2,6 @@ com/filetool/main/Main.java
 com/filetool/util/FileUtil.java
 com/filetool/util/LogUtil.java
 com/elasticcloudservice/predict/Predict.java
+com/elasticcloudservice/predict/Matrix.java
+com/elasticcloudservice/predict/ArrangeUtil.java
+com/elasticcloudservice/predict/StandardUtil.java

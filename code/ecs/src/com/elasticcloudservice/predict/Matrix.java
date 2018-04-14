@@ -3,6 +3,14 @@ package com.elasticcloudservice.predict;
 public class Matrix {
     private float[][] value;
 
+    public float[][] getValue() {
+        return value;
+    }
+
+    public void setValue(float[][] value) {
+        this.value = value;
+    }
+
     public Matrix(float[][] m) {
         this.value = m;
     }
@@ -26,11 +34,49 @@ public class Matrix {
     }
 
     public Matrix multiply(Matrix matrix) {
-        float[][] c = strassenMatrixMultiplyRecursive(value, matrix.value);
+        float[][] c = SquareMatrixMultiply(value, matrix.value);
         Matrix m = new Matrix(c);
         return m;
 
     }
+
+    public static float[][] SquareMatrixMultiply(float A[][], float B[][]) {
+        int rows = A.length;
+        float C[][] = new float[rows][B[0].length];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < B[0].length; j++) {
+                C[i][j] = 0;
+                for (int k = 0; k < A[0].length; k++) {
+                    if (A[i][k] != 0 && B[k][j] != 0) {
+                        C[i][j] += A[i][k] * B[k][j];
+                    }
+                }
+            }
+        }
+        return C;
+
+
+    }
+
+    public Matrix Sqrt() {
+        for (int i = 0; i < value.length; i++) {
+            for (int j = 0; j < value[0].length; j++) {
+                value[i][j] = (float) Math.sqrt(value[i][j]);
+            }
+        }
+        return this;
+    }
+
+    public Matrix Squart() {
+        for (int i = 0; i < value.length; i++) {
+            for (int j = 0; j < value[0].length; j++) {
+                value[i][j] = value[i][j]*value[i][j];
+            }
+        }
+        return this;
+    }
+
 
     public float calulateLoss(Matrix matrix) {
         float loss = 0.0f;
@@ -90,7 +136,7 @@ public class Matrix {
     public Matrix transform() {
         Matrix matrix = new Matrix(new float[this.value[0].length][this.value.length]);
         for (int i = 0; i < matrix.value.length; i++) {
-            for (int j = 0; i < matrix.value[0].length; j++) {
+            for (int j = 0; j < matrix.value[0].length; j++) {
                 matrix.value[i][j] = this.value[j][i];
             }
         }
